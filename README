@@ -1,0 +1,95 @@
+# K-Score Typing Study App
+
+K-Score is a desktop Electron app designed for a research study on **typing dynamics, mood, and anxiety**.  
+Participants complete:
+
+1. A **neutral baseline typing task**
+2. An **emotional essay** about their feelings over the past 2 weeks
+3. The **PHQ-9** (depression) questionnaire
+4. The **GAD-7** (anxiety) questionnaire
+
+The app logs keystroke behaviour and questionnaire responses locally and allows participants to export their data as a single ZIP file.
+
+> ⚠️ This app is a **research tool**, not a diagnostic or clinical product.  
+> It does not provide any mental health diagnosis or treatment.
+
+---
+
+## Features
+
+- **Local-only Electron app** (no network calls for data collection)
+- **Consent & E-signature** screen
+  - Typing/keystroke logging consent
+  - PHQ-9 / GAD-7 consent
+  - Electronic signature (typed name + timestamp)
+- **Baseline typing phase**
+  - Neutral prompt (“describe a typical school day”)
+  - Logs exact key presses, timestamps, backspaces, and derived timing features
+- **Essay phase**
+  - Emotional prompt about feelings over the last 2 weeks
+  - Same keystroke logging as baseline
+- **Autocorrect tracking**
+  - Autocorrect applies only to a **manually highlighted word**
+  - Each correction is logged (original word, corrected word, phase, timestamp, changed/not changed)
+- **PHQ-9 & GAD-7 integration**
+  - Full item text for each question
+  - 0–3 Likert scale with standard wording
+  - Difficulty item for each questionnaire
+  - Per-participant total scores
+- **Data export as a single ZIP**
+  - Keystrokes CSV
+  - Summary metrics CSV (per phase)
+  - Autocorrect events CSV
+  - PHQ-9 CSV (with question text)
+  - GAD-7 CSV (with question text)
+  - Combined PHQ-9 + GAD-7 summary CSV (single metric)
+  - Consent PDF
+  - PHQ-9 PDF
+  - GAD-7 PDF
+
+---
+
+## Tech Stack
+
+- **Electron** (desktop wrapper)
+- **Node.js**
+- **HTML/CSS/Vanilla JS** for the UI
+- **`adm-zip`** for building ZIP exports
+- **`autocorrect`** package for word-level autocorrection
+
+This app is the **data collection front-end**.  
+The NLP model for depressive language classification (e.g. DistilBERT fine-tuned on mental-health text) is trained and run separately.
+
+---
+
+## Project Structure
+
+Key files:
+
+- `main.js` – Electron main process, IPC handlers, CSV/PDF/ZIP export logic
+- `preload.js` – IPC bridge (`contextIsolation: true`)
+- `renderer.js` – Front-end logic, screens, event handlers, keystroke logging, autocorrect integration
+- `index.html` – App shell
+- `style.css` – Basic styling
+- `package.json` – Scripts and build config (electron-builder)
+
+---
+
+## Development Setup
+
+Requirements:
+
+- Node.js (LTS recommended)
+- npm
+- Git (to clone the repo)
+
+```bash
+# clone the repo
+git clone <YOUR_REPO_URL>
+cd k-score-electron
+
+# install dependencies
+npm install
+
+# run the app in dev mode
+npm start
