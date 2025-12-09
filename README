@@ -10,7 +10,7 @@ Participants complete:
 
 The app logs keystroke behaviour and questionnaire responses locally and allows participants to export their data as a single ZIP file.
 
-> ⚠️ This app is a **research tool**, not a diagnostic or clinical product.  
+> This app is a **research tool**, not a diagnostic or clinical product.  
 > It does not provide any mental health diagnosis or treatment.
 
 ---
@@ -58,7 +58,7 @@ The app logs keystroke behaviour and questionnaire responses locally and allows 
 - **`autocorrect`** package for word-level autocorrection
 
 This app is the **data collection front-end**.  
-The NLP model for depressive language classification (e.g. DistilBERT fine-tuned on mental-health text) is trained and run separately.
+The NLP model for depressive language classification (DistilBERT fine-tuned on mental-health text) is trained and run separately.
 
 ---
 
@@ -85,7 +85,7 @@ Requirements:
 
 ```bash
 # clone the repo
-git clone <YOUR_REPO_URL>
+git clone https://github.com/LaliChicken/k-score-electron.git
 cd k-score-electron
 
 # install dependencies
